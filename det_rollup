@@ -1,0 +1,15 @@
+function rat=det_rollup(rope_diam, spool_rad, L_max)
+b=rope_diam/(2*pi);
+a=spool_rad;
+% r = a + b*theta archimedean spiral spiral with pitch (per rev) = rope diameter
+% dL/d(theta)=r = 2*pi*(a + b*theta)
+%  L = a*theta + 0.5*b*theta^2
+%  => A*theta^2+B*theta+C=0 where A=b*pi, B=a, C=-L
+%  Find theta at L_max
+ A=0.5*b;
+ B=a;
+ C=-L_max;
+ thet_max = (-B+sqrt(B^2-4*A*C))/(2*A);
+ dLdthet0 = a;
+ dLdthetm = (a+b*thet_max);
+ rat = dLdthetm/dLdthet0;
