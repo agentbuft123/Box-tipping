@@ -1,0 +1,13 @@
+% finds the torque of the forces on the box
+
+function torque_tip = box_tip_torque(mass, height, length, accel, theta)
+global gravity;
+rot_mat=[cosd(theta),-sind(theta),0;sind(theta),cosd(theta),0;0,0,1];
+CoM_vec=rot_mat*[(-length/2); (height/2); 0];
+n_force=[0;(-mass*gravity); 0]; %normal force
+accel_force=[(mass*accel);0;0]; %force from acceleration
+CoM_accel=cross(CoM_vec,accel_force);
+CoM_n=cross(CoM_vec,n_force);
+torque_mag=CoM_accel+CoM_n;
+torque_tip = torque_mag(3);
+end
