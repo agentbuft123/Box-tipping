@@ -1,0 +1,12 @@
+function dery = box_tip_dynamics(~,y,params)
+lin_accel = params.lin_accel;
+mass = params.mass*params.totenum;
+height = params.tote_height*params.totenum;
+length = params.tote_length;
+theta = y(1); %angle
+omega = y(2); %angular acceleration
+omegadot = box_tip_torque_v2(mass, height, length, lin_accel,180/pi*theta); %function of linear acceleration and an angle
+dery(1) = omega;
+dery(2) = omegadot;
+dery = dery(:); %puts in a vertical array
+
